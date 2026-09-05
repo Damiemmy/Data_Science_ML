@@ -245,4 +245,6 @@ would be an entirely different situation again.
 So our rule becomes:
 Never choose a missing-data strategy merely because Pandas gives you a function for it. Choose it based on the meaning of the data.
 
-That's a serious principle."
+That's a serious principle.
+
+'''
