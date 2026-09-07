@@ -43,3 +43,5 @@ Memorize the concept, not the sentence.
 
 #7.)for coding test use this to return error value
 raise ValueError("Score must be between 0 and 100"):
+
+#8.)print and return and function is the most important concept in python. use return when ever you want to break out of that function and return a value but note that it won't print the value on the terminal after execution unless you use print(function_name()) to print the value returned by the function. print() is used to display output on the terminal but it doesn't return any value. simple analogy function depends on print to show results on the terminal even if its runs command successfully

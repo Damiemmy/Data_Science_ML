@@ -41,15 +41,15 @@ def calculate_grade(score):
     elif score>=90:
         return ("A")
     elif score>=80:
-        print("B")
+        return("B")
     elif score>=70:
-        print("C")
+        return("C")
     elif score>=60:
-        print("D")
+        return("D")
     else:
-        print("F")
+        return("F")
     
-print(calculate_grade(109))
+print(calculate_grade(100))
 
 
 #Challenge 2
@@ -73,52 +73,77 @@ should return:
 10
 '''
 
-def find_max(max_number):
-    highestscore=max_number
-    print(max(highestscore))
+
+def find_max(numbers):
+    if not numbers:
+        raise ValueError("numbers cannot be empty")
+
+    highest = numbers[0]
+
+    for number in numbers:
+        if number > highest:
+            highest = number
+
+    return highest
 
 
-find_max([4, 8, 2, 10, 5]) # i just have to use max() lol
+print(find_max([4, 8, 2, 10, 5])) # i just have to use max() lol
 
 
-#challenge 3
-'''
-Challenge 3
+# #challenge 3
+# '''
+# Challenge 3
 
-Given:
+# Given:
 
-students = [
-    {"name": "John", "score": 85},
-    {"name": "Mary", "score": 72},
-    {"name": "David", "score": 91},
-    {"name": "Sarah", "score": 64}
-]
+# students = [
+#     {"name": "John", "score": 85},
+#     {"name": "Mary", "score": 72},
+#     {"name": "David", "score": 91},
+#     {"name": "Sarah", "score": 64}
+# ]
 
-Write a function that returns the names of students who scored 80 or above.
+# Write a function that returns the names of students who scored 80 or above.
 
-Expected:
+# Expected:
 
-["John", "David"]
-'''
+# ["John", "David"]
+# '''
 
+
+
+#first attempt
+def student_above_80(student_list):
+    qualified_students=[]
+    for students in student_list:
+        if students["score"] >= 80:
+            qualified_students.append(students["name"])
+            print(qualified_students)
+            return qualified_students
+        else:
+            raise ValueError("No Students was qualified")
+    
+    return qualified_students
+    
+#second attempt
 
 def student_above_80(student_list):
     qualified_students=[]
     for students in student_list:
         if students["score"] >= 80:
             qualified_students.append(students["name"])
-        else:
-            print("no students scores are above 80")
-    print(qualified_students)
+        if not qualified_students:
+            raise ValueError("No Students was qualified")
     return qualified_students
 
+
 students = [
-    {"name": "John", "score": 85},
-    {"name": "Mary", "score": 72},
-    {"name": "David", "score": 91},
+    {"name": "John", "score": 90},
+    {"name": "Mary", "score": 82},
+    {"name": "David", "score": 70},
     {"name": "Sarah", "score": 64}
 ]
-student_above_80(students)
+print(student_above_80(students))
 
 
 
