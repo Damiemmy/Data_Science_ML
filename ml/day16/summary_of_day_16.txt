@@ -1,0 +1,57 @@
+🚨 NOW WE CROSS AN IMPORTANT LINE
+
+We've learned:
+
+Residual
+   ↓
+Absolute Error
+   ↓
+MAE
+   ↓
+Squared Error
+   ↓
+MSE
+   ↓
+Square Root
+   ↓
+RMSE
+
+But all of these metrics answer essentially:
+
+"How wrong is the model?"
+
+We haven't properly answered:
+
+"Does the model actually work on students it has never seen?"
+
+That's generalization.
+
+And this is where a lot of beginners get fooled.
+
+
+🧠 TRAINING DATA ≠ UNSEEN DATA
+
+Remember:
+
+model.fit(X, y)
+
+The model sees those examples during training.
+
+Suppose we have:
+
+Student    Study Hours    Attendance    Score
+A             2              65          55
+B             3              70          70
+C             5              90          75
+D             7              95          82
+E             8              98          91
+
+If we train on all five, then evaluate on those same five:
+
+training data → model → predictions → metric
+
+We haven't really tested whether the model can handle new students.
+
+The model has already seen those examples.
+
+It's like giving you an exam and then asking you to reproduce questions you've already practiced.
