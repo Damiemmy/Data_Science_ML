@@ -56,3 +56,13 @@ rmse=np.sqrt(mean_absolute_error(Y_test,prediction))
 
 print("MAE: ",mae)
 print("RMSE: ",rmse)
+
+'''
+plt.fig(figsize=(10,5))
+plt.scatter(X_train,Y_train, color='green')
+plt.plot(X_train,y_predicted_train, color = 'red')
+plt.title('Linear Regression Model - TV Sales - Train Data')
+plt.xlabel('TV')
+plt.ylabel('Sales')
+plt.show
+'''
