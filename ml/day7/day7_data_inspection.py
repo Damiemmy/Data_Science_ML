@@ -40,6 +40,7 @@ print("Missing Rows",df[df.isnull().any(axis=1)])
 print("complete Rows",df[df.notnull().all(axis=1)])
 print("Is Null Boolean Masking", df.isnull().any())
 print("Total Null Count:",df.isnull().sum())
+print("Duplicate Data", df.duplicated().sum())
 #during Boolean masking axis must be specified with value=1 e.g (axis=1) to carry out operation on code without bugs or errors this returns the rows with data that matches the condition
 '''
 print("Missing Rows",df[df.isnull().any()])

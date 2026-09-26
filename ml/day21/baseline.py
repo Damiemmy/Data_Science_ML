@@ -44,3 +44,4 @@ print("Absolute Errors: ", y)
 absolute_error= mean_absolute_error(actual_score,baseline_prediction)
 
 print(absolute_error)
+
