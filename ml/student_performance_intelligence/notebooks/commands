@@ -1,0 +1,78 @@
+import pandas as pd
+
+df = pd.read_csv("../data/raw_student_performance.csv")
+''''''
+#df.head()
+
+# 1. Category distributions
+
+print(df["department"].value_counts())
+print(df["internet_access"].value_counts())
+
+
+# 2. Level distribution
+print(df["level"].value_counts())
+
+# 3. Duplicate student IDs
+print("Unique student IDs:", df["student_id"].nunique())
+print("Total rows:", len(df))
+
+# 4. Invalid-value counts
+print("Negative study hours:",
+      (df["study_hours"] < 0).sum())
+
+print("Attendance > 100:",
+      (df["attendance_rate"] > 100).sum())
+
+print("GPA > 5:",
+      (df["previous_gpa"] > 5).sum())
+
+print("Age < 16:",
+      (df["age"] < 16).sum())
+'''
+'''
+
+
+'''
+duplicate_ids = df[
+    df["student_id"].duplicated(keep=False)
+].sort_values("student_id")
+
+print(duplicate_ids.head(20))
+
+print("Students with repeated IDs:",
+      duplicate_ids["student_id"].nunique())
+
+print("Rows belonging to repeated IDs:",
+      len(duplicate_ids))
+'''
+
+# Exact duplicate rows
+duplicate_mask = df.duplicated(keep=False)
+
+# Records containing at least one missing value
+missing_mask = df.isnull().any(axis=1)
+
+# Records containing known invalid values
+invalid_mask = (
+    (df["study_hours"] < 0)
+    | (df["attendance_rate"] > 100)
+    | (df["previous_gpa"] > 5)
+    | (df["age"] < 16)
+)
+
+print("Duplicate rows:", duplicate_mask.sum())
+print("Rows with missing values:", missing_mask.sum())
+print("Rows with invalid values:", invalid_mask.sum())
+
+print("\nDuplicate + missing:",
+      (duplicate_mask & missing_mask).sum())
+
+print("Duplicate + invalid:",
+      (duplicate_mask & invalid_mask).sum())
+
+print("Missing + invalid:",
+      (missing_mask & invalid_mask).sum())
+
+print("Duplicate + missing + invalid:",
+      (duplicate_mask & missing_mask & invalid_mask).sum())
