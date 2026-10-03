@@ -1,8 +1,17 @@
 import pandas as pd
 
 df = pd.read_csv("../data/raw_student_performance.csv")
-''''''
+
 #df.head()
+
+print(len(df)): #number of rows of a table
+print(df): #printing tables
+print(df.shape): #number of rows and columns
+print(df.dtypes): #data types of each columns
+print(df.isnull().any()): # true or false statement for columns if there are null values
+print(df.isnull().sum()): # total number of null values
+print(df.duplicated()): # number of duplicated rows
+print(df["student_id"].nunique().sum()): #print number of unique value in a row
 
 # 1. Category distributions
 
@@ -13,7 +22,7 @@ print(df["internet_access"].value_counts())
 # 2. Level distribution
 print(df["level"].value_counts())
 
-# 3. Duplicate student IDs
+# 3. Duplicate student IDs(to find a uniquestudent)
 print("Unique student IDs:", df["student_id"].nunique())
 print("Total rows:", len(df))
 
