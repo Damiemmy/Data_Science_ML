@@ -46,10 +46,11 @@ vectorizer = TfidfVectorizer()
 document_vectors = vectorizer.fit_transform(texts)
 
 # Step 4: Accept a student's question.
-query = "I need a document about marine biology"
+query = "I need a document about marine introduction biology"
 
 # Step 5: Convert the query using the same vocabulary.
 query_vector = vectorizer.transform([query])
+
 
 # Step 6: Compare the query with each document.
 scores = cosine_similarity(
@@ -57,15 +58,60 @@ scores = cosine_similarity(
     document_vectors,
 )[0]
 
-# Step 7: Rank the documents.
+# Step 7: Rank documents from highest score to lowest.
 ranked_indices = scores.argsort()[::-1]
 
-# Step 8: Display the best matches.
+# Step 8: Display only documents with a positive score.
+found_results = False
+
 for index in ranked_indices:
+    score = scores[index]
+
+    # Ignore documents with no matching weighted terms.
+    if score <= 0:
+        continue # continue means Stop executing the remaining lines in this iteration and move to the next item in the loop if condition is met.
+
     doc = documents[index]
-    
 
-    print(f" {doc['title']}")
+    print(f"{score:.3f} | {doc['title']}")
+    found_results = True
 
+# Step 9: Handle queries with no lexical matches.
+if not found_results:
+    print("No matching documents found.")
+
+# Step 10: Inspect the document matrix.
+print("Matrix shape:", document_vectors.shape)
+print("Matrix type:", type(document_vectors))
+
+
+print("Vocabulary:")
+print(vectorizer.get_feature_names_out())
+
+print("\nDocument matrix shape:")
 print(document_vectors.shape)
-print(type(document_vectors))
+
+queries = [
+    "heat transfer",
+    "how does heat travel",
+    "marine biology",
+]
+
+for query in queries:
+    query_vector = vectorizer.transform([query])
+
+    scores = cosine_similarity(
+        query_vector,
+        document_vectors,
+    )[0]
+
+    best_index = scores.argmax()
+    best_score = scores[best_index]
+
+    print(f"\nQuery: {query}")
+    print(f"Best score: {best_score:.3f}")
+
+    if best_score == 0:
+        print("No lexical match.")
+    else:
+        print(f"Best document: {documents[best_index]['title']}")
