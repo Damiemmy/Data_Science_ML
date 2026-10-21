@@ -1,0 +1,28 @@
+.1)TF-IDF: It helps search systems identify documents containing terms that are particularly informative.
+
+FUTMxStore example: The term "thermodynamics" may receive a high weight in a document about thermodynamics if it is frequent there but uncommon across the wider collection of academic materials.
+
+2.)Cosine similarity measures the cosine of the angle between two vectors, providing a measure of how closely aligned their directions are. In information retrieval, it can be used to score the similarity between a query vector and document vectors, helping rank candidate documents.
+it can be used to score the similarity between a query vector and document vectors, helping rank candidate documents.
+
+FUTMxStore example: A student searches for "how heat moves." A document titled "Heat Transfer Fundamentals" may receive a high similarity score even if the wording differs, particularly when using semantic embeddings.
+
+Important: cosine similarity is a score, not automatically a probability or a guarantee that a document is relevant.
+
+
+Here's a quick comparison:
+Concept	            The question it answers
+..........................................
+TF-IDF:	            Which terms are informative in these documents?
+Cosine similarity:	How closely aligned are these two vectors?
+Top-k:	            Which \(k\) candidates rank highest?
+Precision:	        Of the documents retrieved, how many are relevant?
+Recall:         	Of all relevant documents available, how many did we retrieve?
+
+SUMMARY:
+- TF-IDF keyword retrieval:                   finds documents that share important words with a query.
+- Semantic retrieval using embeddings:        finds documents whose meaning is similar to the query, even when the wording differs.
+- key word search:                            looks for related word
+- semantic search:                            looks for realted meaning
+- Rank fusion:                                Combines the rankings into one ordered list.
+- What is Reciprocal Rank Fusion (RRF)?       Reciprocal Rank Fusion is a method of combining search rankings.

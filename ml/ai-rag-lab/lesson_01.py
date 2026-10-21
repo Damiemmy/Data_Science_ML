@@ -115,3 +115,12 @@ for query in queries:
         print("No lexical match.")
     else:
         print(f"Best document: {documents[best_index]['title']}")
+
+
+
+
+
+
+
+
+

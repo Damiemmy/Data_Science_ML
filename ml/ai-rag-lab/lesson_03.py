@@ -1,4 +1,5 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
+#EMBEDDINGS
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -25,23 +26,41 @@ documents = [
     },
 ]
 
-texts=[
-    f"{doc['title']} {doc['content']}" for doc in documents
+# 1. Load a pretrained embedding model.
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+# 2. Combine each title and its content.
+texts = [
+    f"{doc['title']}. {doc['content']}"
+    for doc in documents
 ]
 
-vectorizer = TfidfVectorizer()
-document_vector = vectorizer.fit_transform(texts)
-query='i need a machine learning material'
-query_vector=vectorizer.transform([query])
-
-scores= cosine_similarity(
-    query_vector,
-    document_vector,
+# 3. Convert every document into an embedding.
+document_embeddings = model.encode(
+    texts,
+    normalize_embeddings=True,
 )
 
-ranked_indicies=scores.argsort()[::-1]
+# 4. Enter a question using different wording.
+query = "How do computer learn from data?"
 
-for index in ranked_indicies:
-    doc=scores[index]
-    score=scores[]
-print(ranked_indicies)
+# 5. Convert the question into an embedding.
+query_embedding = model.encode(
+    [query],
+    normalize_embeddings=True,
+)
+
+# 6. Compare the query with the document embeddings.
+scores = cosine_similarity(
+    query_embedding,
+    document_embeddings,
+)[0]
+
+# 7. Rank and display the results.
+ranked_indices = scores.argsort()[::-1]
+
+for index in ranked_indices:
+    doc = documents[index]
+    score = scores[index]
+
+    print(f"{score:.3f} | {doc['title']}")

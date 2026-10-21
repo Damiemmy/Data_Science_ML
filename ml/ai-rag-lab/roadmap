@@ -1,0 +1,39 @@
+Our next major topic is hybrid retrieval: combining keyword and semantic search so FUTMxStore can handle both exact searches such as GST101 and natural-language questions such as “Which notes explain the movement of thermal energy?”
+
+After that, we'll learn document chunking and PDF extraction—the bridge between searching document titles and retrieving evidence from inside full academic documents.
+
+python -m pip install sentence-transformers
+
+
+5.)PROPOSAL
+
+Our proposed RAG stack
+Layer	Technology
+Document storage	Your existing FUTMxStore storage
+Metadata and academic relationships	Django + PostgreSQL
+Text extraction and chunking	PDF/text extraction pipeline
+Embeddings	Hosted embedding model API
+Vector retrieval	PostgreSQL + pgvector
+Keyword retrieval	PostgreSQL full-text search
+Retrieval ranking	Hybrid retrieval and relevance ranking
+Answer generation	Hosted LLM API
+API and application logic	Django REST Framework
+Background indexing	Celery + Redis when needed
+We don't need a separate vector database at the beginning. PostgreSQL can hold your existing academic data and document embeddings.
+The implementation sequence
+1. Document ingestion: extract text from uploaded PDFs and split it into chunks.
+2. Indexing: generate and store embeddings for those chunks.
+3. Retrieval: combine semantic search with keyword search and academic filters.
+4. RAG generation: send the retrieved context to the LLM and generate a grounded answer.
+5. Evaluation and production hardening: test retrieval quality, prevent unauthorized document exposure, handle missing evidence, and monitor cost and latency.
+One crucial point: RAG is more than a chatbot connected to an LLM. The retrieval stage must actually find the right information, and the generation stage must use that evidence correctly.
+
+For FUTMxStore, we'll build our own RAG pipeline using your existing Django architecture. We can consider a framework such as LangChain or LlamaIndex later if it provides a concrete benefit; neither is mandatory.
+
+6.)FREE RESOURCES:
+Useful resources to bookmark:
+- scikit-learn documentation
+- Sentence Transformers documentation
+- Ollama
+- pgvector
+- PyMuPDF documentation
