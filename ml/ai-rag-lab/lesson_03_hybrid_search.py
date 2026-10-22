@@ -49,7 +49,7 @@ def rank_by_score(scores):
     return scores.argsort()[::-1]
 
 
-def hybrid_search(query, top_k=2, rrf_k=10):
+def hybrid_search(query, top_k=3, rrf_k=10):
     # Keyword scores.
     query_tfidf = vectorizer.transform([query])
     keyword_scores = cosine_similarity(
@@ -108,7 +108,7 @@ def hybrid_search(query, top_k=2, rrf_k=10):
 
 
 if __name__ == "__main__":
-    query = "How does computer understands data?"
+    query = "How does computer learn from data?"
 
     for result in hybrid_search(query):
         print(
